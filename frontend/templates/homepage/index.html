@@ -1,0 +1,447 @@
+{% extends 'common/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block content %}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero d-flex align-items-center">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-flex flex-column justify-content-center">
+        <h1 data-aos="fade-up">AI based remote monitoring and management platform</h1>
+        <h2 data-aos="fade-up" data-aos-delay="400">Stop spending time on your RMM, let the RMM work for you!</h2>
+        <div data-aos="fade-up" data-aos-delay="600">
+          <div class="text-center text-lg-start">
+            <a href="{% url 'customers:add_customer' %}"
+               class="btn-get-started d-inline-flex align-items-center justify-content-center align-self-center">
+              <span>Get Started</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+        <img src="{% static 'img/hero-img.png' %}" class="img-fluid" alt="">
+      </div>
+    </div>
+  </div>
+
+</section><!-- End Hero -->
+
+<main id="main">
+
+  <!-- ======= Values Section ======= -->
+  <section id="services" class="services">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
+      <header class="section-header">
+        <h2>Services</h2>
+        <p>Explore The NetRMM Platform</p>
+      </header>
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-box blue">
+            <i class="ri-computer-line icon"></i>
+            <h3>Proactive monitoring and management</h3>
+            <p>The goal of proactive monitoring is to identify and resolve issues before they cause significant downtime or disruption to the client's business operations.</p>
+            <a href="{% url 'features' %}" class="read-more">
+              <span>Read More</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-box orange">
+            <i class="ri-terminal-window-fill icon"></i>
+            <h3>Secure Remote Access</h3>
+            <p>Enables professionals to effectively manage and monitor devices and systems from a remote location, while maintaining the security and integrity of the data and devices being managed.</p>
+            <a href="{% url 'features' %}" class="read-more"><span>Read More</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+          <div class="service-box green">
+            <i class="ri-robot-line icon"></i>
+            <h3>IT Automation & Scripts</h3>
+            <p>Automating routine tasks and using scripts to perform more complex tasks, IT professionals can reduce errors, increase efficiency, and improve the overall reliability of their IT systems.</p>
+            <a href="{% url 'features' %}" class="read-more">
+              <span>Read More</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+          <div class="service-box red">
+            <i class="ri-download-cloud-2-line icon"></i>
+            <h3>Patch Management</h3>
+            <p>Identify and apply software updates or patches to computer systems and applications in a timely and systematic manner. The purpose of patch management is to address security vulnerabilities and bugs, improve performance, and enhance the functionality of the software</p>
+            <a href="{% url 'features' %}" class="read-more">
+              <span>Read More</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="600">
+          <div class="service-box purple">
+            <i class="ri-building-line icon"></i>
+            <h3>IT Asset Management</h3>
+            <p>IT asset reports can be used by organizations to make informed decisions about their technology investments, to optimize the use of their IT assets, and to ensure that their assets are secure and well-maintained.</p>
+            <a href="{% url 'features' %}" class="read-more"><span>Read More</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="700">
+          <div class="service-box pink"><i class="ri-rocket-2-line icon"></i>
+            <h3>Application Deployment</h3>
+            <p>Reduces errors, save time, and increase efficiency in the software deployment process. Additionally, automated application deployment can improve security by ensuring that software applications are up to date and patched against known vulnerabilities.</p>
+            <a href="{% url 'features' %}" class="read-more"><span>Read More</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!--  <section id="values" class="values">-->
+
+<!--    <div class="container" data-aos="fade-up">-->
+
+<!--      <header class="section-header">-->
+<!--        <h2>Highlights</h2>-->
+<!--        <p>Explore the NetRMM platform</p>-->
+<!--      </header>-->
+
+<!--      <div class="row mb-2">-->
+
+<!--        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">-->
+<!--          <div class="box">-->
+<!--            <img src="{% static 'img/values-1.png' %}" class="img-fluid" alt="">-->
+<!--            <h3>Proactive monitoring and management</h3>-->
+<!--            &lt;!&ndash; <p class="margin-bottom">-->
+<!--              Identify and resolve any IT issues before it becomes serious such as slow/bad system performance or failure.-->
+<!--              Create custom alerts, automatically generate notifications and log tickets. Troubleshoot or let netRMM auto remediate the issue. See all the IT devices' health, performance, and systems data for IT asset management, reporting, and endpoint management.-->
+<!--            </p> &ndash;&gt;-->
+<!--            <a href="{% url 'features' %}" class="btn fixed-bottom mb-4 text-white mx-auto"-->
+<!--               style="background-color: #5969f3;width:200px">Learn More</a>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">-->
+<!--          <div class="box">-->
+<!--            <img src="{% static 'img/values-2.png' %}" class="img-fluid" alt="">-->
+<!--            <h3>Secure Remote Access</h3>-->
+<!--            &lt;!&ndash; <p class="margin-bottom">-->
+<!--              Quickly, easily, and securely take control of all devices using netRMM's one click remote access tool. Perform maintenance, verify issues, and provide quick support using netRMM with lightning-fast connection speeds.-->
+<!--            </p> &ndash;&gt;-->
+<!--            <a href="{% url 'features' %}" class="btn fixed-bottom mb-4 text-white mx-auto"-->
+<!--               style="background-color: #5969f3;width:200px">Learn More</a>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">-->
+<!--          <div class="box">-->
+<!--            <img src="{% static 'img/values-3.png' %}" class="img-fluid" alt="">-->
+<!--            <h3>IT Automation & Scripts</h3>-->
+<!--            &lt;!&ndash; <p class="margin-bottom">-->
+<!--              Save time and boost productivity by automating repeatable tasks and basic remediations with powerful scripting and automation capabilities. Deploy automations on demand, on schedule, or in response to alerts using common scripting language netRMM supports (Powershell, Batch, & ShellScript).-->
+<!--            </p> &ndash;&gt;-->
+<!--            <a href="{% url 'features' %}" class="btn fixed-bottom mb-4 text-white mx-auto"-->
+<!--               style="background-color: #5969f3;width:200px">Learn More</a>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--      <div class="row">-->
+
+<!--        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">-->
+<!--          <div class="box">-->
+<!--            <img src="{% static 'img/values-1.png' %}" class="img-fluid" alt="">-->
+<!--            <h3>Patch Management</h3>-->
+<!--            &lt;!&ndash; <p class="margin-bottom">-->
+<!--              Identify and resolve any IT issues before it becomes serious such as slow/bad system performance or failure.-->
+<!--              Create custom alerts, automatically generate notifications and log tickets. Troubleshoot or let netRMM auto remediate the issue. See all the IT devices' health, performance, and systems data for IT asset management, reporting, and endpoint management.-->
+<!--            </p> &ndash;&gt;-->
+<!--            <a href="{% url 'features' %}" class="btn fixed-bottom mb-4 text-white mx-auto"-->
+<!--               style="background-color: #5969f3;width:200px">Learn More</a>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">-->
+<!--          <div class="box">-->
+<!--            <img src="{% static 'img/values-2.png' %}" class="img-fluid" alt="">-->
+<!--            <h3>IT Asset Management</h3>-->
+<!--            &lt;!&ndash; <p class="margin-bottom">-->
+<!--              Quickly, easily, and securely take control of all devices using netRMM's one click remote access tool. Perform maintenance, verify issues, and provide quick support using netRMM with lightning-fast connection speeds.-->
+<!--            </p> &ndash;&gt;-->
+<!--            <a href="{% url 'features' %}" class="btn fixed-bottom mb-4 text-white mx-auto"-->
+<!--               style="background-color: #5969f3;width:200px">Learn More</a>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">-->
+<!--          <div class="box">-->
+<!--            <img src="{% static 'img/values-3.png' %}" class="img-fluid" alt="">-->
+<!--            <h3>Application Deployment</h3>-->
+<!--            &lt;!&ndash; <p class="margin-bottom">-->
+<!--              Save time and boost productivity by automating repeatable tasks and basic remediations with powerful scripting and automation capabilities. Deploy automations on demand, on schedule, or in response to alerts using common scripting language netRMM supports (Powershell, Batch, & ShellScript).-->
+<!--            </p> &ndash;&gt;-->
+<!--            <a href="{% url 'features' %}" class="btn fixed-bottom mb-4 text-white mx-auto"-->
+<!--               style="background-color: #5969f3;width:200px">Learn More</a>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </section>&lt;!&ndash; End Values Section &ndash;&gt;-->
+
+  <!-- ======= Counts Section ======= -->
+  <!-- <section id="counts" class="counts">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row gy-4">
+
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-emoji-smile"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Happy Clients</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Projects</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-headset" style="color: #15be56;"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hours Of Support</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="count-box">
+            <i class="bi bi-people" style="color: #bb0852;"></i>
+            <div>
+              <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hard Workers</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section> -->
+  <!-- End Counts Section -->
+
+  <!-- ======= Features Section ======= -->
+  <!-- End Features Section -->
+
+  <!-- ======= Services Section ======= -->
+  <!-- End Services Section -->
+
+  <!-- ======= Pricing Section ======= -->
+  <!-- End Pricing Section -->
+
+  <!-- ======= F.A.Q Section ======= -->
+  <!-- End F.A.Q Section -->
+
+  <!-- ======= Portfolio Section ======= -->
+  <!-- End Portfolio Section -->
+
+  <!-- ======= Testimonials Section ======= -->
+  <!-- End Testimonials Section -->
+
+  <!-- ======= Team Section ======= -->
+  <!-- <section id="team" class="team">
+
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h2>Team</h2>
+        <p>Our hard working team</p>
+      </header>
+
+      <div class="row gy-4">
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+          <div class="member">
+            <div class="member-img">
+              <img src="{% static 'img/team/team-1.jpg' %}" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>Walter White</h4>
+              <span>Chief Executive Officer</span>
+              <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+          <div class="member">
+            <div class="member-img">
+              <img src="{% static 'img/team/team-2.jpg' %}" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>Sarah Jhonson</h4>
+              <span>Product Manager</span>
+              <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+          <div class="member">
+            <div class="member-img">
+              <img src="{% static 'img/team/team-3.jpg' %}" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>William Anderson</h4>
+              <span>CTO</span>
+              <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+          <div class="member">
+            <div class="member-img">
+              <img src="{% static 'img/team/team-4.jpg' %}" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+              <span>Accountant</span>
+              <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section> -->
+  <!-- End Team Section -->
+
+  <!-- ======= Clients Section ======= -->
+  <!-- <section id="clients" class="clients">
+
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h2>Our Clients</h2>
+        <p>Temporibus omnis officia</p>
+      </header>
+
+      <div class="clients-slider swiper">
+        <div class="swiper-wrapper align-items-center">
+          <div class="swiper-slide"><img src="{% static 'img/clients/client-1.png' %}" class="img-fluid" alt=""></div>
+          <div class="swiper-slide"><img src="{% static 'img/clients/client-2.png' %}" class="img-fluid" alt=""></div>
+          <div class="swiper-slide"><img src="{% static 'img/clients/client-3.png' %}" class="img-fluid" alt=""></div>
+          <div class="swiper-slide"><img src="{% static 'img/clients/client-4.png' %}" class="img-fluid" alt=""></div>
+          <div class="swiper-slide"><img src="{% static 'img/clients/client-5.png' %}" class="img-fluid" alt=""></div>
+          <div class="swiper-slide"><img src="{% static 'img/clients/client-6.png' %}" class="img-fluid" alt=""></div>
+          <div class="swiper-slide"><img src="{% static 'img/clients/client-7.png' %}" class="img-fluid" alt=""></div>
+          <div class="swiper-slide"><img src="{% static 'img/clients/client-8.png' %}" class="img-fluid" alt=""></div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+
+  </section> -->
+  <!-- End Clients Section -->
+
+  <!-- ======= Recent Blog Posts Section ======= -->
+  <section id="recent-blog-posts" class="recent-blog-posts pt-0">
+
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h2>Blog</h2>
+        <p>Recent posts form our Blog</p>
+      </header>
+
+      <div class="row g-3">
+
+        {% for article in articles %}
+          <div class="col-lg-4">
+            <div class="post-box">
+              <div class="post-img"><img src="{{article.banner.url}}" class="img-fluid" alt=""></div>
+              <span class="post-date">{{ article.created_at }}</span>
+              <h3 class="post-title">{{article.title}}</h3>
+              <a href="{% url 'blogs:article' slug=article.slug %}" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        {% endfor %}
+
+        <!-- <div class="col-lg-4">
+          <div class="post-box">
+            <div class="post-img"><img src="{% static 'img/blog/blog-2.jpg' %}" class="img-fluid" alt=""></div>
+            <span class="post-date">Fri, August 28</span>
+            <h3 class="post-title">Et repellendus molestiae qui est sed omnis voluptates magnam</h3>
+            <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="post-box">
+            <div class="post-img"><img src="{% static 'img/blog/blog-3.jpg' %}" class="img-fluid" alt=""></div>
+            <span class="post-date">Mon, July 11</span>
+            <h3 class="post-title">Quia assumenda est et veritatis aut quae</h3>
+            <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div> -->
+
+      </div>
+
+    </div>
+
+  </section>
+  <!-- End Recent Blog Posts Section -->
+
+  <!-- ======= Contact Section ======= -->
+
+
+</main><!-- End #main -->
+
+{% endblock %}

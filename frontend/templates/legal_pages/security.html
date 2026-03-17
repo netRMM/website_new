@@ -1,0 +1,44 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+  
+  <main id="main">
+    <section class="breadcrumbs">
+        <div class="container">
+  
+          <ol>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+            <li>Security</li>
+          </ol>
+          <h2>
+            Security
+          </h2>
+  
+        </div>
+    </section>
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+
+        <div class="container" data-aos="fade-up">  
+            
+          <div class="row gx-0">
+  
+            <div class="col d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+              <div>
+                <!-- <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2> -->
+                <p>
+                  {% autoescape off %}
+                    {{global.security}}                    
+                  {% endautoescape %}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </section><!-- End About Section -->
+
+  </main><!-- End #main -->
+
+{% endblock %}

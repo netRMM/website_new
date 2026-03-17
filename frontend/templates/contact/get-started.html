@@ -1,0 +1,311 @@
+{% extends 'common/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+  <style>
+    .imp {
+      color: red;
+    }
+  </style>
+
+  <main id="main">
+
+    <section id="contact" class="contact mt-3">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <p>Get Started</p>
+        </header>
+
+        <div class="row">
+          <div class="col-lg-6 mx-auto">
+            {% include 'common/messages.html' %}
+            <div class="tab fw-bold">
+  
+              <form id="regForm" action="{% url 'customers:add_customer' %}" method="post">
+                {% csrf_token %}
+                <div class="row mb-2 g-3">
+                  <div class="col-md">
+                    <label for="{{ form.firstname.id_for_label }}">First Name <span class='imp'>*</span></label>
+                    {% render_field form.firstname class+="form-control validate" %}
+                  </div>
+                  <div class="col-md">
+                    <label for="{{ form.lastname.id_for_label }}">Last Name <span class='imp'>*</span></label>
+                    {% render_field form.lastname class+="form-control validate" %}
+                  </div>
+                </div>
+  
+                <div class="row mb-2 g-3">
+                  <div class="col-md">
+                    <label for="{{ form.company_name.id_for_label }}">Company Name <span class='imp'>*</span></label>
+                    {% render_field form.company_name class+="form-control validate" %}
+                  </div>
+  
+                  <div class="col-md">
+                    <label for="{{ form.bracket.id_for_label }}">Type</label>
+                    {% render_field form.bracket class+="form-select validate" %}
+                  </div>
+  
+                </div>
+  
+                <div class="row mb-2 g-3">
+                  <div class="col-md">
+                    <label for="{{ form.email.id_for_label }}">Email <span class='imp'>*</span></label>
+                    {% render_field form.email class+="form-control validate" %}
+                    <span id="email-help">
+  
+                    </span>
+                  </div>
+  
+                  <div class="col-md">
+                    <label for="{{ form.phone_number.id_for_label }}">Contact Number <span class='imp'>*</span></label>
+                    {% render_field form.phone_number class+="form-control validate" %}
+                  </div>
+                </div>
+  
+                <div class="row mb-2 g-3">
+                  <div class="col-md">
+                    <label for="{{ form.address.id_for_label }}">Address</label>
+                    {% render_field form.address rows="3" class+="form-control validate" style="height:100px; resize:none;" %}
+                  </div>
+  
+                </div>
+  
+                <div class="row mb-2 g-3">
+                  <div class="col-md">
+                    <label for="{{ form.country.id_for_label }}">Country <span class='imp'>*</span></label>
+                    {% render_field form.country class+="form-select validate" %}
+                  </div>
+  
+                  <div class="col-md">
+                    <label for="{{ form.contact_mode.id_for_label }}">Contact Mode <span class='imp'>*</span></label>
+                    {% render_field form.contact_mode class+="form-select validate" %}
+                  </div>
+  
+                </div>
+  
+                <div class="row mb-2 g-3">
+                  <div class="col-md-4">
+                    <label for="{{ form.number_of_devices.id_for_label }}">No. of Devices <span
+                        class='imp'>*</span></label>
+                    {% render_field form.number_of_devices class+="form-control validate" %}
+                  </div>
+  
+                  <div class="col-md">
+                    <label for="{{ form.subdomain.id_for_label }}">Subdomain Name <span class='imp'>*</span></label>
+                    <div class="input-group">
+                      {% render_field form.subdomain class+="form-control" aria-label="subdomain" aria-describedby="netrmm-label" %}
+                      <span class="input-group-text" id="netrmm-label">.netrmm.com</span>
+                      <span class="text-primary bg-white input-group-text">
+                        <i class="bi bi-question-circle"
+                          title=" - Can use (0-9) Numbers&#10;- Can use (a-z) alphabets&#10;- Special Characters are not allowed&#10;- Hyphen (-) can be used in between only"></i>
+                      </span>
+                    </div>
+                    <span id="subdomain-help">
+  
+                    </span>
+                  </div>
+                </div>
+                <div class="row justify-content-end mt-3">
+                  <div class="col-6">
+                    <button class="btn btn-primary w-100 text-white shadow" style="background-color: #5969f3; border-color: #5969f3;" type="submit" id="nextBtn">
+                      Next 
+                      <i class="bi bi-chevron-right ms-2"></i>
+                    </button>
+                  </div>
+                </div>
+  
+              </form>
+  
+            </div>
+  
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"
+    integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <script>
+    // Add contry code to phone number field
+    var input = document.querySelector("#id_phone_number");
+    iti = window.intlTelInput(input, {
+      // options here
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+
+    let form = document.getElementById('regForm')
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Temporarily prevent the form from submitting
+      var fullNumber = iti.getNumber();
+      // console.log(fullNumber); // or alert(fullNumber);
+      input.value = fullNumber;
+      form.submit(); 
+    });
+
+    // Adjust the width of the input field and the dropdown
+    var adjustWidth = function() {
+        var container = document.querySelector('.iti');
+        if (container) {
+            container.style.width = '100%'; // Set the intl-tel-input container to 100% width
+        }
+    };
+
+    adjustWidth(); // Adjust width on initial load
+
+    // Optional: Adjust width on window resize
+    window.addEventListener('resize', adjustWidth);
+
+    const domain = window.location.host;
+    const scheme = window.location.protocol;
+
+    window.setTimeout(function () {
+      $(".prompts").fadeTo(500, 0).slideUp(500, function () {
+        $(this).remove();
+      });
+    }, 5000);
+
+    // Subdomain availablity checker
+    // Get references to the DOM elements
+    var subdomain_help = document.getElementById('subdomain-help');
+    var email_help = document.getElementById('email-help');
+    var submit_button = document.getElementById('nextBtn');
+
+    // Loader message or image to display while fetching data
+    const loadingMessage = `<div class="d-flex align-items-center text-dark p-2">
+                              <strong role="status">Checking...</strong>
+                              <div class="spinner-border ms-auto" aria-hidden="true"></div>
+                            </div>`;
+
+    // Debounce function to limit how often a function can be called
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Async function to check subdomain availability
+    async function check_subdomain_availablility(event) {
+        // Regex to allow only letters, numbers, and hyphens in subdomain
+        const regex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+        var subdomain = document.getElementById('{{form.subdomain.id_for_label}}'); // Adjust to use the actual ID
+        var currentValue = subdomain.value.toLowerCase();
+        subdomain.value = currentValue;
+
+        // Validate the subdomain format
+        if (!regex.test(currentValue)) {
+            subdomain.value = currentValue.slice(0, -1); // Remove invalid characters
+        }
+
+        if (subdomain.value === '') {
+            subdomain_help.innerHTML = '';
+            submit_button.setAttribute('disabled', true);
+        } else {
+            subdomain_help.innerHTML = loadingMessage; // Display loader
+            try {
+                // Fetch request to check subdomain availability
+                let cond = '{{bool}}'
+                let url = ''
+                if(cond == 'True'){
+                  url = `http://127.0.0.1:8002/api/configs/check-subdomain/?subdomain=${subdomain.value}`
+                }else{
+                  url = `https://demo.netrmm.com/api/configs/check-subdomain/?subdomain=${subdomain.value}`
+                }
+                // console.log(url)
+                const response = await fetch(url);
+                const data = await response.json();
+                console.log(data)
+                if (!response.ok) throw new Error(data.message || `HTTP error! status: ${response.status}`);
+                
+                // Update UI based on availability
+                if (data['exists'] === true) {
+                  // console.log('exists')
+                    subdomain_help.className = 'form-text fw-normal text-danger';
+                    subdomain_help.innerHTML = 'Subdomain not available!';
+                    submit_button.setAttribute('disabled', true);
+                } else {
+                    subdomain_help.className = 'form-text fw-normal text-success';
+                    subdomain_help.innerHTML = 'Subdomain available ✔';
+                }
+                // Check overall form validity
+                checkFormValidity();
+            } catch (error) {
+                subdomain_help.innerHTML = 'Error checking subdomain';
+                subdomain_help.className = 'form-text fw-normal text-danger';
+                submit_button.setAttribute('disabled', true);
+            }
+        }
+    }
+
+    // Async function to check email validation
+    // async function check_email_validation(event) {
+    //     // Regex for basic email format validation
+    //     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //     var email = document.getElementById('{{form.email.id_for_label}}'); // Adjust to use the actual ID
+    //     var currentValue = email.value.toLowerCase();
+
+    //     if (!regex.test(currentValue)) {
+    //         email_help.innerHTML = 'Invalid email format';
+    //         email_help.className = 'form-text fw-normal text-danger';
+    //         submit_button.setAttribute('disabled', true);
+    //     } else {
+    //         email_help.innerHTML = loadingMessage; // Display loader
+    //         try {
+    //             // Fetch request to validate email
+    //             const response = await fetch(`${scheme}//${domain}/api/customers/email-validator?email=${email.value}`); // Adjust the API endpoint
+    //             const data = await response.json();
+    //             if (!response.ok) throw new Error(data.message || `HTTP error! status: ${response.status}`);
+                
+    //             // Update UI based on email validation response
+    //             email_help.className = data.message == 'Email is available for registration.' ? 'form-text fw-normal text-success' : 'form-text fw-normal text-danger';
+    //             email_help.innerHTML = data.message;
+    //             // Check overall form validity
+    //             checkFormValidity();
+    //         } catch (error) {
+    //             email_help.innerHTML = 'Error checking email';
+    //             email_help.className = 'form-text fw-normal text-danger';
+    //         }
+    //     }
+    // }
+
+    // Apply debounce to the validation functions
+    // var debouncedCheckEmailValidation = debounce(check_email_validation, 500);
+    var debouncedCheckSubdomainValidation = debounce(check_subdomain_availablility, 500);
+
+    // Event listeners for keyup and paste events on email and subdomain fields
+    // document.getElementById('{{form.email.id_for_label}}').addEventListener('keyup', debouncedCheckEmailValidation);
+    // document.getElementById('{{form.email.id_for_label}}').addEventListener('paste', (event) => {
+        // setTimeout(() => debouncedCheckEmailValidation(event), 1); // Delay to ensure paste content is processed
+    // });
+    document.getElementById('{{form.subdomain.id_for_label}}').addEventListener('keyup', debouncedCheckSubdomainValidation);
+
+    // Function to check the overall validity of the form based on both fields
+    function checkFormValidity() {
+        // if (subdomain_help.className.includes('text-success') && email_help.className.includes('text-success')) {
+        if (subdomain_help.className.includes('text-success')) {
+            submit_button.removeAttribute('disabled');
+        } else {
+            submit_button.setAttribute('disabled', true);
+        }
+    }
+
+  </script>
+{% endblock %}

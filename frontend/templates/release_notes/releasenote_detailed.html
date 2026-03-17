@@ -1,0 +1,57 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'homepage' %}">Home</a></li>
+          <li><a href="{% url 'releasenote:releasenotes' %}">Release Notes</a></li>
+          <li>Release Note Detail</li>
+        </ol>
+        <h2>Release Note Detail</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Single Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col entries">
+
+            <article class="entry entry-single">
+
+              <h2 class="entry-title">
+                {{release.title}}  <span class="badge bg-primary">v{{release.version}}</span>
+                <p class="text-muted fs-6">{{release.month|capfirst}} {{release.year}}</p>
+              </h2>
+              <hr>
+              <div class="entry-content">
+                {% autoescape off %}
+                {{release.body}}
+                {% endautoescape %}
+
+              </div>
+
+
+            </article><!-- End blog entry -->
+
+            <!--Comments-->
+
+          </div><!-- End blog entries list -->
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Single Section -->
+
+  </main><!-- End #main -->
+
+{% endblock %}

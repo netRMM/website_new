@@ -1,0 +1,102 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<main id="main">
+  
+  <!-- ======= Breadcrumbs ======= -->
+  <section class="breadcrumbs">
+    <div class="container">
+
+      <ol>
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li><a href="{% url 'blogs:blog' %}">Blog</a></li>
+        <li>{{article.title}}</li>
+      </ol>
+      <!-- <h2>Blog Single</h2> -->
+
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+  <!-- ======= Blog Single Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row justify-content-center">
+
+        <div class="col-lg-8 entries">
+
+          <article class="entry entry-single">
+
+            <div class="entry-img">
+              <img src="{{article.banner.url}}" alt="" class="img-fluid">
+            </div>
+
+            <h2 class="entry-title">
+              <a href="blog-single.html">{{article.title}}</a>
+            </h2>
+
+            <div class="entry-meta">
+              <ul>
+                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">{{article.author}}</a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html">{{article.created_at}}</a></li>
+                <!-- <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li> -->
+              </ul>
+            </div>
+
+            <div class="entry-content">
+              {% autoescape off %}
+              {{article.content}}
+              {% endautoescape %}
+
+            </div>
+
+            <div class="entry-footer">
+              <!-- <i class="bi bi-folder"></i>
+              <ul class="cats">
+                <li><a href="#">Business</a></li>
+              </ul> -->
+
+              <i class="bi bi-tags"></i>
+              <ul class="tags">
+                {% for tag in article.tags.all %}
+                <li><a href="{% url 'blogs:blog' %}?tag={{tag.slug}}">{{tag.name}}</a></li>
+                {% endfor %}
+              </ul>
+              <br>
+              {% if article.category %}
+                <i class="bi bi-folder"></i>
+                <a href="{% url 'blogs:blog_category' slug=article.category.slug %}">{{ article.category.name }}</a>
+              {% endif %}
+            </div>
+
+          </article><!-- End blog entry -->
+
+          <div class="blog-author d-flex align-items-center">
+            <img src="{{article.author.profile.picture.url}}" class="rounded-circle float-left" alt="">
+            <div>
+              <h4>{{article.author.get_full_name}}</h4>
+              <div class="social-links">
+                <!-- <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+                <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+                <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a> -->
+                {{article.author.profile.designation}}
+              </div>
+              <p>
+                {{article.author.profile.bio}}
+              </p>
+            </div>
+          </div><!-- End blog author bio -->
+
+          <!--Comments-->
+
+        </div><!-- End blog entries list -->
+
+        {% include 'blogs/sidebar.html' %}
+
+      </div>
+
+    </div>
+  </section><!-- End Blog Single Section -->
+
+</main><!-- End #main -->
+{% endblock %}

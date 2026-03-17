@@ -1,0 +1,26 @@
+# Allow all bots to access the public content
+User-agent: *
+Disallow: /admin/
+Disallow: /*?tag=
+Disallow: /*?version=
+Disallow: /*?category=
+
+# Specific rules for Googlebot
+User-agent: Googlebot
+Disallow: /no-google/
+Allow: /public/
+# Increase crawl-delay to reduce server load (in seconds)
+Crawl-delay: 10
+
+# Specific rules for Bingbot
+User-agent: Bingbot
+Disallow: /no-bing/
+Allow: /public/
+Crawl-delay: 10
+
+# Prevent archiving of content
+User-agent: ia_archiver
+Disallow: /
+
+# Sitemap location
+Sitemap: https://www.netrmm.com/sitemap.xml

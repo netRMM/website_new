@@ -1,0 +1,288 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    {% if title %}
+        <title>{{ title }}</title>
+    {% elif page_name %}
+        <title>{{ page_name }} | NetRMM</title>
+    {% else %}
+        <title>{{ meta_title|default:'NetRMM' }}</title>
+    {% endif %}
+    
+    {% if meta_description %}
+        <meta name="description" content="{{ meta_description }}">
+    {% endif %}
+
+    {% if meta_keywords %}
+        <meta name="keywords" content="{{ meta_keywords }}">
+    {% endif %}
+
+    {% if meta_robots %}
+        <meta name="robots" content="{{ meta_robots }}">
+    {% endif %}
+
+    
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    
+
+    {% if meta_author %}
+        <meta name="author" content="{{ meta_author }}">
+    {% endif %}
+
+    <!-- Open Graph tags -->
+    {% if meta_title %}
+        <meta property="og:title" content="{{ meta_title }}">
+    {% endif %}
+    
+    {% if meta_description %}
+        <meta property="og:description" content="{{ meta_description }}">
+    {% endif %}
+    
+    
+    
+    {% if banner %}
+        <meta property="og:image" content="{{ banner }}">
+    {% endif %}
+    
+    
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    
+
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary">
+    
+    {% if meta_title %}
+        <meta name="twitter:title" content="{{ meta_title }}">
+    {% endif %}
+    
+    {% if meta_description %}
+        <meta name="twitter:description" content="{{ meta_description }}">
+    {% endif %}
+    
+    {% if banner %}
+        <meta name="twitter:image" content="{{ banner }}">
+    {% endif %}
+  
+    <!-- Favicons -->
+    <link href="{% static 'media/logos/netrmm_logo.png' %}" rel="icon">
+    <link href="{% static 'media/logos/netrmm_logo.png' %}" rel="apple-touch-icon">
+  
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  
+    <!-- Template Main CSS File -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    
+    <!-- Intl tel input -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+    <!-- =======================================================
+    * Template Name: FlexStart - v1.9.0
+    * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    {{global.google_analytics_tag|safe}}
+  
+</head>
+<body>
+    {% url 'homepage' as home_url %}
+    <header id="header" {% if request.path == home_url %}class="header fixed-top "{% else %}class="header fixed-top bg-white"{% endif %}>
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        <a href="{{home_url}}" class="logo d-flex align-items-center">
+            {% if global.show_logo == True %}
+            <img src="{{global.logo.url}}" alt="">
+            {% endif %}
+            
+            {% if global.show_name == True %}
+            <span>NetRMM</span>
+            {% endif %}
+            
+        </a>      
+        <nav id="navbar" class="navbar">
+            <ul>
+            {% url 'buildwithnetrmm' as buildwithnetrmm_url %}
+            {% url 'releasenote:releasenotes' as releasenotes_url %}
+            {% url 'pricing' as pricing_url %}
+            {% url 'blogs:blog' as blog_url %}
+            {% url 'customers:contact_us' as contact_us_url %}
+            {% url 'careers' as careers_url %}
+            {% url 'login' as login_url %}
+            {% url 'features' as features_url %}
+            <li class="ps-4"><a class="nav-link scrollto{% if request.path == home_url %} active{% endif %}" href="{{home_url}}">Home</a></li>
+            <li class="ps-4"><a class="nav-link{% if request.path == buildwithnetrmm_url %} active{% endif %}" href="{{buildwithnetrmm_url}}">Build With Us</a></li>
+            <li class="ps-4"><a class="nav-link{% if request.path == releasenotes_url or request.path|slice:':14' == '/releasenotes/' %} active{% endif %}" href="{{releasenotes_url}}">Release Notes</a></li>
+            <!-- <li><a class="nav-link scrollto" href="#services">Services</a></li> -->
+            <!-- <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li> -->
+            <!-- <li><a href="blog.html">Blog</a></li> -->
+            <li class="dropdown ps-4"><a href="#"><span>Products</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                <li><a href="{% url 'features' %}">RMM</a></li>
+                <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                    <ul>
+                    <li><a href="#">Deep Drop Down 1</a></li>
+                    <li><a href="#">Deep Drop Down 2</a></li>
+                    <li><a href="#">Deep Drop Down 3</a></li>
+                    <li><a href="#">Deep Drop Down 4</a></li>
+                    <li><a href="#">Deep Drop Down 5</a></li>
+                    </ul>
+                </li> -->
+                <li><a href="#">Remote Desktop</a></li>
+                </ul>
+            </li>
+            <li class="ps-4"><a class="nav-link{% if request.path == pricing_url %} active{% endif %}" href="{{pricing_url}}">Pricing</a></li>
+            <li class="ps-4"><a class="nav-link{% if request.path == blog_url or request.path|slice:':6' == '/blog/' %} active{% endif %}" href="{{blog_url}}">Blog</a></li>
+            <li class="ps-4"><a class="nav-link{% if request.path == contact_us_url %} active{% endif %}" href="{{contact_us_url}}">Contact Us</a></li>
+            <li class="ps-4"><a class="nav-link{% if request.path == careers_url %} active{% endif %}" href="{{careers_url}}">Careers</a></li>
+            <li class="ps-4"><a class="nav-link{% if request.path == login_url %} active{% endif %}" href="{{login_url}}">Login</a></li>
+            <a class="getstarted" href="{% url 'customers:add_customer' %}">Get Started</a>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+        </div>
+    </header>
+    {% block content %}
+    
+    {% endblock %}
+    <!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+
+    <!-- <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-12 text-center">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+          </div>
+          <div class="col-lg-6">
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-5 col-md-12 footer-info">
+                    <a href="" class="logo d-flex align-items-center">
+                        {% if global.show_logo == True %}
+                        <img src="{{global.logo.url}}" alt="">
+                        {% endif %}
+
+                        {% if global.show_name == True %}
+                        <span>NetRMM</span>
+                        {% endif %}
+                    </a>
+                    <!-- <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p> -->
+                    <div class="social-links mt-3">
+                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-6 footer-links">
+                  <h4>COMPLIANCE</h4>
+                  <ul>
+                    <li><i class="bi bi-chevron-right"></i> <a href="#">HIPPA</a></li>
+                    <li><i class="bi bi-chevron-right"></i> <a href="#">NIST</a></li>
+                    <li><i class="bi bi-chevron-right"></i> <a href="#">CCPA</a></li>
+                    <li><i class="bi bi-chevron-right"></i> <a href="#">GDPR</a></li>
+                  </ul>
+                </div>
+
+                <div class="col-lg-2 col-6 footer-links">
+                    <h4>USEFUL LINKS</h4>
+                    <ul>
+                        <li><i class="bi bi-chevron-right"></i> <a href="{% url 'docs:all_docs' %}">Documentation</a>
+                        </li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="{% url 'featurerequest' %}">Request Feature</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i> <a href="{% url 'features' %}">NetRMM Features</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-chevron-right"></i> <a href="{% url 'faq' %}">NetRMM FAQs</a>
+                        </li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="{% url 'about' %}">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+                    <h4>Contact Us</h4>
+                    <p>
+                        {{ global.address|linebreaksbr }} <br>
+                        <strong>Phone:</strong> {{global.contact_numbers}}<br>
+                        <strong>Email:</strong> {{global.email}}<br>
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="d-flex justify-content-center mt-4">
+            <a class="me-3" href="{% url 'privacy_policy' %}" target="_blank" rel="noopener noreferrer">Privacy
+                Policy</a>
+            <a class="me-3" href="{% url 'terms_of_service' %}" target="_blank" rel="noopener noreferrer">Terms of
+                Service</a>
+            <a href="{% url 'security' %}" target="_blank" rel="noopener noreferrer">Security</a>
+        </div>
+        <div class="copyright pt-2">
+            &copy; Copyright <strong><span>NetRMM</span></strong>. All Rights Reserved. v{{APP_VERSION_NUMBER}}
+        </div>
+
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<!-- Vendor JS Files -->
+<script src="{% static 'vendor/purecounter/purecounter.js' %}"></script>
+<script src="{% static 'vendor/aos/aos.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'js/main.js' %}"></script>
+
+{% if anchor %}
+<script type='text/javascript'>
+
+window.onload = function() {
+  window.location = '#{{ anchor }}'
+};  
+</script>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+{% extends 'common/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block content %}
+
+  <style>
+    .btn-book{
+        display: inline-block;
+        padding: 8px 40px 10px 40px;
+        border-radius: 50px;
+        color: white;
+        transition: none;
+        font-size: 16px;
+        font-weight: 400;
+        font-family: "Nunito", sans-serif;
+        font-weight: 600;
+        transition: 0.3s;
+        background-color: #012970;
+    }
+    .btn-book:hover {
+        background: #2252a7;
+        color: #fff;
+    }
+    .alert-dark {
+        color: #141619 ;
+        background-color: #ededff;
+        border-color: #bcbebf;
+    }
+  </style>
+  
+  <main id="main">
+  
+    <section id="contact" class="contact mt-3">
+        <div class="container" data-aos="fade-up">
+            <section id="pricing" class="pricing">
+
+                <div class="container" data-aos="fade-up">
+          
+                  <header class="section-header">
+                    <h2>Pricing</h2>
+                    <p>Check our Pricing</p>
+                  </header>
+          
+                  <div class="row justify-content-center gy-4" data-aos="fade-left">
+          
+                    <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                      <div class="box">
+                        <h3 style="color: #07d5c0;">Trial Plan</h3>
+                        <div class="price"><sup>$</sup>0<span> / month, device</span></div>
+                        <img src="{% static 'img/pricing-free.png' %}" class="img-fluid" alt="">
+                        <ul>
+                          <li>14 Days Free Trial</li>
+                        </ul>
+                        <a href="#" class="btn-buy mb-2" style='width:12rem;'>Buy Now</a>
+                        <a href="#" class="btn-book" style='width:12rem;'>Book Demo</a>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                      <div class="box">
+                        <h3 style="color: #ff0071;">Premium Plan</h3>
+                        <div class="price"><sup>$</sup>1<span> / month, device</span></div>
+                        <img src="{% static 'img/pricing-ultimate.png' %}" class="img-fluid" alt="">
+                        <ul>
+                          <li>Min $20 / month</li>
+                        </ul>
+                        <a href="#" class="btn-buy mb-2" style='width:12rem;'>Buy Now</a>
+                        <a href="#" class="btn-book" style='width:12rem;'>Book Demo</a>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+              </section><!-- End Pricing Section -->
+              <div class="row row-cols-1 mx-auto">
+                <div class="col-lg-10 mx-auto">
+                  <div class="alert alert-dark shadow sticky-bottom mt-5 text-center" style="font-family: 'Nunito', sans-serif;border-radius: 10px;">
+                    <p class="fw-bold">
+                      If you want new feature in our product, request a feature by clicking on this request feature button.
+                    </p>
+                    <a href="{% url 'featurerequest' %}" target="_blank" rel="noopener noreferrer" class="btn fw-bold text-white fw-normal pt-2 pb-2 pe-4 ps-4" style="background-color: #5969f3;border-radius: 10px;">Request Feature</a>
+                  </div> 
+                </div>
+              </div>
+        </div>
+  
+      </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+{% endblock %}

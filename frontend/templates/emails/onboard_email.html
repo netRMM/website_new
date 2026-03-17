@@ -1,0 +1,61 @@
+{% autoescape off %}
+<!-- User Onboarding Email Template with Trial Information -->
+
+<body style="background-color:white;@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');font-family: 'Ubuntu', sans-serif;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0"
+        width="550" bgcolor="white">
+        <tbody>
+            <tr>
+                <td align="center" style="background-color: #012970;height: 50px;border-radius: 10px;padding-top: 20px;padding-bottom: 20px;width: 100%;">
+
+                    <a href="#" style="text-decoration: none;width: 100%;">
+                        <p style="color:white;
+                                  font-weight:bold;">
+                            <img src="https://netrmm.com/static/media/logos/netrmm_logo.png" alt="netrmm_logo" style="display: block;padding: 0px;" width="40" height="40">
+                            <br>    
+                            Welcome to NetRMM
+                        </p>
+                    </a>
+                </td>
+            </tr>
+            <tr style="height: 300px;">
+                <td align="center" style="border: none;
+                        border-bottom: 2px solid #012970;
+                        padding-right: 20px;padding-left:20px">
+
+                    <p style="font-weight: bolder;font-size: 14px;
+                            letter-spacing: 0.025em;
+                            color:#012970;">
+                        Hello {{ user.first_name }},
+                    </p>
+                    <p style="font-weight: bolder;font-size: 12px;
+                            letter-spacing: 0.025em;
+                            color:black;">
+                        Welcome aboard! We're excited to have you join us. Your account has been set up and your 14-day free trial has begun. Here are your login details:
+                    </p>
+                    <br>
+                    <p style="font-weight: bold;font-size: 12px;color:black;">
+                        Username: <strong>{{ data.username }}</strong><br>
+                        Password: <strong>{{ data.password }}</strong>
+                    </p>
+                    <br>
+                    <p style="font-weight: bold;font-size: 12px;color:black;">
+                        You can access your specific subdomain at the following URL:<br>
+                        <a href="http://{{ user.subdomain }}.netrmm.com" target="_blank" rel="noopener noreferrer" style="color:#012970;">{{ user.subdomain }}.netrmm.com</a>
+                    </p>
+                    <br>
+                    <p style="font-size: 12px;color:black;">
+                        After your trial period ends, the service is available at $1 per month per device. We recommend changing your password upon your first login for security reasons. If you have any questions or require assistance, our support team is always here to help.
+                    </p>
+                    <br>
+                    <p style="font-size: 12px;color:#012970;">
+                        Thank you for choosing NetRMM, and we look forward to supporting your success!
+                    </p>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+{% endautoescape %}

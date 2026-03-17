@@ -1,0 +1,34 @@
+{% autoescape off %}
+<!-- Responsive Email Template -->
+<body style="background-color:white; font-family: 'Ubuntu', sans-serif;">
+	<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="white" style="max-width: 600px; margin: 0 auto;">
+		<tbody>
+			<tr>
+				<td align="center" style="background-color: #012970; height: 50px; border-radius: 10px; padding-top: 20px; padding-bottom: 20px;">
+
+					<a href="#" style="text-decoration: none;">
+						<p style="color:white; font-weight:bold; margin: 0;">
+							<img src="https://netrmm.com/media/logos/netrmm_logo.png" alt="NetRMM Logo" style="display: block; padding: 0;" width="40" height="40">
+							<br>
+							NetRMM
+						</p>
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="padding: 20px; border-bottom: 2px solid #012970;">
+					<p style="font-weight: bold; font-size: 16px; letter-spacing: 0.025em; color: #012970; margin: 0;">
+						Hello {{ user.firstname }},
+					</p>
+                    <p style="font-size: 14px; letter-spacing: 0.025em; color: #333; margin: 20px 0;">
+						Please click on the activate button below to confirm your registration.
+					</p>
+                    <a href="{{scheme}}://{{host}}{% url 'customers:activate' uidb64=uid token=token %}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #012970; border: 2px solid #012970; padding: 10px 20px; font-weight: bold; display: inline-block; border-radius: 5px;">
+                        Activate
+                    </a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+{% endautoescape %}

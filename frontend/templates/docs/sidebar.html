@@ -1,0 +1,48 @@
+<div class="col-12 mb-4">
+  <div class="sidebar">
+    <div class="row g-3">
+      {% if categories %}
+      <div class="col-12 col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="sidebar-title mb-3">
+              <i class="bi bi-folder me-2"></i>Docs Category
+            </h3>
+            <div class="sidebar-item categories">
+              <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
+                {% for category in categories %}
+                <li>
+                  <a href="{% url 'docs:all_docs' %}?category={{category.slug}}" 
+                     class="badge bg-primary text-decoration-none px-3 py-2">
+                    {{category.name}}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if tags %}
+      <div class="col-12 col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="sidebar-title mb-3">
+              <i class="bi bi-tags me-2"></i>Tags
+            </h3>
+            <div class="sidebar-item tags">
+              <ul>
+                {% for tag in tags %}
+                <li><a href="{% url 'docs:all_docs' %}?tag={{tag.slug}}">{{tag.name}}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

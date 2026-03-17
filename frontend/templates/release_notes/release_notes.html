@@ -1,0 +1,132 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<style>
+          .alert-dark {
+            color: #141619 ;
+            background-color: #ededff;
+            border-color: #bcbebf;
+        }
+</style>
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <ol>
+              <li><a href="{% url 'homepage' %}">Home</a></li>
+              <li>Release Notes</li>
+            </ol>
+            <h2>
+              Release Notes
+            </h2>
+          </div>
+          <div class="col-lg-4">
+            <div class="input-group">
+              <input type="text" class="form-control" id="search-input" placeholder="Search Version" aria-label="Search Version" aria-describedby="searchbtn">
+              <button class="btn btn-outline-primary" type="button" id="searchbtn" onclick="filter_by_version()"><i class="bi bi-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row justify-content-center">
+
+          <div class="col-lg-12 entries">
+
+            <article class="entry">
+              <div class="list-group">
+                {% for release in releases %}
+                <a href="{% url 'releasenote:releasenote_detailed' release_id=release.unique_id %}" class="list-group-item list-group-item-action" aria-current="true">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 fw-bold">{{release.title}}</h5>
+                    <small>{{release.month|capfirst}} {{release.year}}</small>
+                  </div>
+                  <small class="badge bg-primary">v{{release.version}}</small>
+                </a>
+                {% endfor %}
+              </div>
+              {% comment %} {% for release in releases %}
+              <a class="fs-5" href="{% url 'releasenote:releasenote_detailed' release_id=release.unique_id %}">
+                <div class="card mb-2 fw-bold">
+                  <div class="card-header">
+                    {{release.title}} {{release.month|capfirst}}-{{release.year}} v{{release.version}}
+                  </div>
+                </div>
+              </a>
+              {% endfor %} {% endcomment %}
+            </article>
+            <div class="blog-pagination">
+              <ul class="justify-content-center">
+                {% if releases.has_previous %}
+                <li>
+                  <a href="{% url 'releasenote:releasenotes' %}">
+                    <i class="bi bi-skip-start-fill"></i>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="?page={{releases.previous_page_number}}">
+                    <i class="bi bi-caret-left-fill"></i>
+                  </a>
+                </li>
+                {% endif %}
+
+                {% for num in releases.paginator.page_range %}
+
+                {% if releases.number == num %}
+                <li class="active"><a href="?page={{num}}">{{num}}</a></li>
+                {% elif num > releases.number|add:'-3' and num < releases.number|add:'3' %} 
+                        
+                <li><a href="?page={{num}}">{{num}}</a></li>
+                {% endif %}
+
+                {% endfor %}
+
+                {% if articles.has_next %}
+                <li><a href="?page={{releases.next_page_number}}">
+                    <i class="bi bi-caret-right-fill"></i>
+                </a></li>
+
+                <li><a href="?page={{releases.paginator.num_pages}}">
+                    <i class="bi bi-skip-end-fill"></i>
+                </a></li>
+                {% endif %}
+              </ul>
+            </div>
+
+          </div><!-- End blog entries list -->
+
+          <div class="row row-cols-1 mx-auto">
+            <div class="col-lg-10 mx-auto">
+              <div class="alert alert-dark shadow sticky-bottom mt-5 text-center" style="font-family: 'Nunito', sans-serif;border-radius: 10px;">
+                <p class="fw-bold">
+                  If you want new feature in our product, request a feature by clicking on this request feature button.
+                </p>
+                <a href="{% url 'featurerequest' %}" target="_blank" rel="noopener noreferrer" class="btn fw-bold text-white fw-normal pt-2 pb-2 pe-4 ps-4" style="background-color: #5969f3;border-radius: 10px;">Request Feature</a>
+              </div> 
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+  <script>
+    let version = document.getElementById('search-input')
+    function filter_by_version(){
+        window.location = `{% url 'releasenote:releasenotes' %}`+`?version=${version.value}`
+    }
+  </script>
+
+{% endblock %}

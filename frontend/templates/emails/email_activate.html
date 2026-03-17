@@ -1,0 +1,30 @@
+{% extends 'common/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+  
+  <main id="main">
+    
+    <section id="hero" class="hero d-flex align-items-center">
+      <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="card text-center rounded-3" style="border-top: 5px solid #012970;">
+                <div class="card-header">
+                  <div class="card-title fw-bold fs-2">
+                    <i class="bi bi-check-circle-fill text-success me-1"></i>
+                    Email Confirmation Successful
+                  </div>
+                </div>
+                <div class="card-body text-center">
+                  <p class="fs-6 fw-bold">Thank you for confirming your email. We’ll soon get in touch with you regarding your onboarding on the NetRMM platform. It may take a few days or up to a week. Stay tuned!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+{% endblock %}

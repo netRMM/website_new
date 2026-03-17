@@ -1,0 +1,121 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'homepage' %}">Home</a></li>
+          <li>Docs</li>
+        </ol>
+        <h2>
+          Documentation
+        </h2>
+
+      </div>
+    </section>
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          {% include 'docs/sidebar.html' %}
+        </div>
+
+        <div class="row justify-content-center">
+
+          <div class="col-lg-8 entries">
+            {% for document in documents %}
+
+            <article class="entry">
+
+
+              <h2 class="entry-title">
+                {% if document.category is none %}
+                  <a href="{% url 'docs:document_view' cat='-' doc=document.slug %}">{{document.title}}</a>
+                {% else %}
+                  <a href="{% url 'docs:document_view' cat=document.category.slug doc=document.slug %}">{{document.title}}</a>
+                {% endif %}
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a><time datetime="2020-01-01">{{ document.created_at }}</time></a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>
+                {{document.content|striptags|safe|truncatechars:200}}
+                </p>
+                <div class="read-more">
+                  {% if document.category is none %}
+                  <a href="{% url 'docs:document_view' cat='-' doc=document.slug %}">Read More</a>
+                  {% else %}
+                  <a href="{% url 'docs:document_view' cat=document.category.slug doc=document.slug %}">Read More</a>
+                  {% endif %}
+                </div>
+              </div>
+              <br>
+              <div class="entry-footer">
+                <i class="bi bi-tags"></i>
+                <ul class="tags">
+                  {% for tag in document.tags.all %}
+                  <li><a href="?tag={{tag.slug}}">{{tag.name}}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+
+            </article><!-- End blog entry -->
+            {% endfor %}
+
+<!-- 
+            <div class="blog-pagination">
+              <ul class="justify-content-center">
+                {% if articles.has_previous %}
+        <li><a href="{% url 'blogs:blog' %}{% if tag %}?tag={{tag.slug}}{% endif %}">
+            <i class="bi bi-skip-start-fill"></i>
+        </a>
+      </li>
+
+        <li><a href="?page={{articles.previous_page_number}}{% if tag %}&tag={{tag.slug}}{% endif %}">
+          <i class="bi bi-caret-left-fill"></i>
+          </a>
+        </li>
+        {% endif %}
+
+        {% for num in articles.paginator.page_range %}
+
+        {% if articles.number == num %}
+        <li class="active"><a href="?page={{num}}{% if tag %}&tag={{tag.slug}}{% endif %}">{{num}}</a></li>
+        {% elif num > articles.number|add:'-3' and num < articles.number|add:'3' %} 
+                
+        <li><a href="?page={{num}}{% if tag %}&tag={{tag.slug}}{% endif %}">{{num}}</a></li>
+        {% endif %}
+
+        {% endfor %}
+
+        {% if articles.has_next %}
+        <li><a href="?page={{articles.next_page_number}}{% if tag %}&tag={{tag.slug}}{% endif %}">
+            <i class="bi bi-caret-right-fill"></i>
+        </a></li>
+
+        <li><a href="?page={{articles.paginator.num_pages}}{% if tag %}&tag={{tag.slug}}{% endif %}">
+            <i class="bi bi-skip-end-fill"></i>
+        </a></li>
+        {% endif %}
+              </ul>
+            </div> -->
+
+          </div><!-- End blog entries list -->
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+  </main><!-- End #main -->
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+  
+  <main id="main">
+    <section class="breadcrumbs">
+        <div class="container">
+  
+          <ol>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+            <li>Feature-Request</li>
+          </ol>
+          <h2>
+            Feature Request
+          </h2>
+  
+        </div>
+    </section>
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+
+        <div class="container" data-aos="fade-up">  
+            
+          <div class="row gx-0">
+  
+            <div class="col d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+              <div>
+                <!-- <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2> -->
+                <div data-canny />
+                <script>!function(w,d,i,s){function l(){if(!d.getElementById(i)){var f=d.getElementsByTagName(s)[0],e=d.createElement(s);e.type="text/javascript",e.async=!0,e.src="https://canny.io/sdk.js",f.parentNode.insertBefore(e,f)}}if("function"!=typeof w.Canny){var c=function(){c.q.push(arguments)};c.q=[],w.Canny=c,"complete"===d.readyState?l():w.attachEvent?w.attachEvent("onload",l):w.addEventListener("load",l,!1)}}(window,document,"canny-jssdk","script");</script>
+                <script>
+                Canny('render', {
+                    boardToken: '3c169b50-0ea6-630a-2d67-a44f045312c1',
+                    basePath: null, // See step 2
+                    ssoToken: null, // See step 3
+                });
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </section><!-- End About Section -->
+
+  </main>
+{% endblock %}

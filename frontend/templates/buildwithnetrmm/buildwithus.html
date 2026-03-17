@@ -1,0 +1,99 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <section class="breadcrumbs">
+    <div class="container">
+
+      <ol>
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li>Build With NetRMM</li>
+      </ol>
+      <h2>
+        Build With NetRMM
+      </h2>
+
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+  <section id="contact" class="contact pt-4">
+      <style>
+          .ph-heading{
+            color: #5969f3;
+          }
+          .ph-base{
+            margin-bottom: 2rem;
+          }
+          
+
+          .alert-dark {
+            color: #141619 ;
+            background-color: #ededff;
+            border-color: #bcbebf;
+        }
+      </style>
+      <div class="container" data-aos="fade-up">
+          <section id="values" class="values pt-0 pb-0">
+
+              <div class="container" data-aos="fade-up">
+        
+                <div class="row justify-content-center">
+                  <div class="col-lg-10">
+                    <p class="fw-bolder fs-4 ph-heading">
+                      netRMM Developer Program Overview
+                    </p>
+                    <hr class="border border-2 opacity-50">
+                    <p class="lh-base ph-base">
+                      This program was designed to provide support and resources for vendors who wish to build integrations with netRMM solutions, enabling programmers and the vendors to expand their use cases as well as the reach, and take their business to new heights.
+                    </p>
+                    <p class="fw-bolder fs-4 ph-heading">
+                      netRMM's Open Ecosystem
+                    </p>
+                    <hr class="border border-2 opacity-50">
+                    <p class="lh-base">
+                      netRMM offers a broad and open platform to create opportunities for our engineers and MSP partners to attract new clients and create deeper relationships with existing clients. When the developers and the solution providers are encouraged to innovate, they are able to contribute towards custom solutions to their companies while MSPs are able to deliver the best customer experience possible. Our open ecosystem empowers our partners to choose the best tools for their needs.
+                    </p>
+                    <p class="lh-base ph-base">
+                      We support our Developer community with a commitment to foster creativity and growth through strategic integrations with netRMM.
+                    </p>
+                    <p class="fw-bolder fs-4 ph-heading">
+                      Working with netRMM Development Team
+                    </p>
+                    <hr class="border border-2 opacity-50">
+                    <p class="lh-base">
+                      We offer a self-service learning site designed to provide developers with all the product information and training necessary to develop the most valuable integrations with netRMM solutions.
+                    </p>
+                    <p class="lh-base">
+                      Leverage the netRMM Knowledge Base, where the documentation lives for all netRMM technologies.
+                    </p>
+                    <p class="lh-base">
+                      netRMM provides access to a presentation deck to help vendors share the story of how integrating with netRMM solutions can add value to their solution.
+                    </p>
+                    <p class="lh-base ph-base">
+                      Service providers can gain access to a variety of case study templates to help increase market visibility.
+                    </p>
+                    
+                  </div>
+                </div>
+                
+              </div>
+              
+            </section><!-- End Values Section -->
+            <div class="row row-cols-1 mx-auto">
+              <div class="col-lg-10 mx-auto">
+                <div class="alert alert-dark shadow sticky-bottom mt-5 text-center" style="font-family: 'Nunito', sans-serif;border-radius: 10px;">
+                  <p class="fw-bold">
+                    If you want new feature in our product, request a feature by clicking on this request feature button.
+                  </p>
+                  <a href="{% url 'featurerequest' %}" target="_blank" rel="noopener noreferrer" class="btn fw-bold text-white fw-normal pt-2 pb-2 pe-4 ps-4" style="background-color: #5969f3;border-radius: 10px;">Request Feature</a>
+                </div> 
+              </div>
+            </div>
+      </div>
+
+    </section><!-- End Contact Section -->
+
+</main><!-- End #main -->
+{% endblock %}

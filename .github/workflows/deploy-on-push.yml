@@ -1,0 +1,51 @@
+name: Deploy on Push
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to master branch
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 400 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+
+    - name: SSH and Deploy
+      run: |
+        ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'ENDSSH'
+          set -e  # Stop on first error
+          
+          # Activate virtual environment
+          source /home/ubuntu/Environments/website/bin/activate
+          
+          # Navigate to project directory
+          cd /home/ubuntu/NetRMM_website/netrmm-website
+          
+          # Setup git to use GitHub username and token for operations
+          git config --global credential.helper store
+          echo "https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
+          
+          git pull
+          
+          # Django project setup
+          python3 manage.py makemigrations
+          python3 manage.py migrate
+          python3 manage.py collectstatic --noinput
+          
+          # Restart services
+          sudo systemctl restart netrmm_website
+          sudo systemctl restart nginx
+          # Add any other necessary commands or scripts below
+          
+        ENDSSH

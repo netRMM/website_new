@@ -1,6 +1,6 @@
 # Release
 
-## 1.2.0
+## 1.2.1
 
 - Support for uploading images for blog posts and documentation.
 - Site information such as about, privacy policy etc. comes from the database.

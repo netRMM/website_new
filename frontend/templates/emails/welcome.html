@@ -1,0 +1,42 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<main id="main">
+  <section id="hero" class="hero d-flex align-items-center py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card text-center rounded-3 shadow-sm" style="border-top: 5px solid #012970;">
+            
+            <div class="card-header bg-white border-bottom-0 pt-4">
+              <div class="card-title fw-bold fs-2 text-dark">
+                <i class="bi bi-clock-history text-primary me-2"></i>
+                Request Received
+              </div>
+            </div>
+
+            <div class="card-body px-4 pb-4">
+              <p class="fs-6 text-muted mb-3">
+                Thank you for signing up with NetRMM!
+              </p>
+
+              <div class="alert alert-light border text-start mb-4 p-3 rounded">
+                {% if subdomain %}
+                <p class="mb-2 text-secondary small">
+                  <strong>Reserved Workspace:</strong> 
+                  <span class="text-primary fw-semibold">{{ subdomain }}.netrmm.com</span>
+                </p>
+                {% endif %}
+                <p class="mb-0 text-secondary small">
+                  We are preparing and provisioning your workspace. Once setup is complete, you will receive an email with your <strong>account activation link</strong> to set your password and access NetRMM.
+                </p>
+              </div>              
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

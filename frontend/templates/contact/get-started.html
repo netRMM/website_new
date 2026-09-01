@@ -7,135 +7,115 @@
     .imp {
       color: red;
     }
+    .form-label-sm { font-size: 0.8rem; margin-bottom: 2px; color: #495057; }
+    .form-control-sm-custom { font-size: 0.875rem; padding: 0.375rem 0.65rem; border-radius: 6px; }
+    .section-header-compact p { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; color: #012970; }
+    .section-header-compact span { font-size: 0.85rem; color: #6c757d; }
   </style>
 
   <main id="main">
-
-    <section id="contact" class="contact py-3">
-
+    <section id="contact" class="contact py-4 d-flex align-items-center justify-content-center" style="min-height: 85vh;">
       <div class="container" data-aos="fade-up">
 
-        <header class="section-header">
-          <p>Get Started</p>
-        </header>
-
-        <div class="row">
-          <div class="col-lg-8 col-xl-7">
-            {% include 'common/messages.html' %}
-
-            <!-- ADD IT HERE: Global error banner for API/network issues -->
-        <div id="form-error-alert" class="alert alert-danger" style="display: none; margin-bottom: 20px;"></div>
-
-            <div class="tab fw-bold">
-  
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto">
+            
+            <div class="card border-0 shadow-sm rounded-3 p-3 p-md-4 bg-white">
               
+              <div class="text-center section-header-compact mb-3">
+                <p>Get Started with NetRMM</p>
+                <span>Setup your workspace in under a minute</span>
+              </div>
+
+              {% include 'common/messages.html' %}
+              <div id="form-error-alert" class="alert alert-danger py-2 px-3 small" style="display: none; margin-bottom: 12px;"></div>
+
               <form id="regForm" onsubmit="return false;" novalidate>
                 {% csrf_token %}
+
                 <div class="row g-2 mb-2">
-                  <div class="col-md">
-                    <label for="{{ form.firstname.id_for_label }}">First Name <span class='imp'>*</span></label>
-                    {% render_field form.firstname class+="form-control validate" %}
+                  <div class="col-md-6">
+                    <label class="form-label-sm fw-semibold" for="{{ form.firstname.id_for_label }}">First Name <span class='imp'>*</span></label>
+                    {% render_field form.firstname class+="form-control form-control-sm-custom validate" placeholder="John" %}
                   </div>
-                  <div class="col-md">
-                    <label for="{{ form.lastname.id_for_label }}">Last Name <span class='imp'>*</span></label>
-                    {% render_field form.lastname class+="form-control validate" %}
+                  <div class="col-md-6">
+                    <label class="form-label-sm fw-semibold" for="{{ form.lastname.id_for_label }}">Last Name <span class='imp'>*</span></label>
+                    {% render_field form.lastname class+="form-control form-control-sm-custom validate" placeholder="Doe" %}
                   </div>
                 </div>
-  
+
                 <div class="row g-2 mb-2">
-                  <div class="col-md">
-                    <label for="{{ form.company_name.id_for_label }}">Company Name <span class='imp'>*</span></label>
-                    {% render_field form.company_name class+="form-control validate" %}
+                  <div class="col-md-6">
+                    <label class="form-label-sm fw-semibold" for="{{ form.company_name.id_for_label }}">Company Name <span class='imp'>*</span></label>
+                    {% render_field form.company_name class+="form-control form-control-sm-custom validate" placeholder="Acme Corp" %}
                   </div>
-  
-                  <div class="col-md">
-                    <label for="{{ form.bracket.id_for_label }}">Type</label>
-                    {% render_field form.bracket class+="form-select validate" %}
-                  </div>
-  
-                </div>
-  
-                <div class="row g-2 mb-2">
-                  <div class="col-md">
-                    <label for="{{ form.email.id_for_label }}">Email <span class='imp'>*</span></label>
-                    {% render_field form.email class+="form-control validate" %}
-                    <span id="email-help">
-  
-                    </span>
-                  </div>
-  
-                  <div class="col-md">
-                    <label for="{{ form.phone_number.id_for_label }}">Contact Number <span class='imp'>*</span></label>
-                    {% render_field form.phone_number class+="form-control validate" %}
-                  </div>
-                </div>
-  
-                <div class="row g-2 mb-2">
-                  <div class="col-md">
-                    <label for="{{ form.address.id_for_label }}">Address</label>
-                    {% render_field form.address rows="3" class+="form-control validate" style="height:100px; resize:none;" %}
-                  </div>
-  
-                </div>
-  
-                <div class="row g-2 mb-2">
-                  <div class="col-md">
-                    <label for="{{ form.country.id_for_label }}">Country <span class='imp'>*</span></label>
-                    {% render_field form.country class+="form-select validate" %}
-                  </div>
-  
-                  <div class="col-md">
-                    <label for="{{ form.contact_mode.id_for_label }}">Contact Mode <span class='imp'>*</span></label>
-                    {% render_field form.contact_mode class+="form-select validate" %}
-                  </div>
-  
-                </div>
-  
-                <div class="row g-2 mb-2">
-                  <div class="col-md-4">
-                    <label for="{{ form.number_of_devices.id_for_label }}">No. of Devices <span
-                        class='imp'>*</span></label>
-                    {% render_field form.number_of_devices class+="form-control validate" %}
-                  </div>
-  
-                  <div class="col-md">
-                    <label for="{{ form.subdomain.id_for_label }}">Subdomain Name <span class='imp'>*</span></label>
-                    <div class="input-group">
-                      {% render_field form.subdomain class+="form-control" aria-label="subdomain" aria-describedby="netrmm-label" %}
-                      <span class="input-group-text" id="netrmm-label">.netrmm.com</span>
-                      <span class="text-primary bg-white input-group-text">
-                        <i class="bi bi-question-circle"
-                          title=" - Can use (0-9) Numbers&#10;- Can use (a-z) alphabets&#10;- Special Characters are not allowed&#10;- Hyphen (-) can be used in between only"></i>
-                      </span>
+                  <div class="col-md-6">
+                    <label class="form-label-sm fw-semibold" for="{{ form.subdomain.id_for_label }}">Workspace Subdomain <span class='imp'>*</span></label>
+                    <div class="input-group input-group-sm">
+                      {% render_field form.subdomain class+="form-control form-control-sm-custom" placeholder="acme" aria-label="subdomain" %}
+                      <span class="input-group-text bg-light text-muted small" style="font-size: 0.8rem;">.netrmm.com</span>
                     </div>
-                    <span id="subdomain-help">
-  
-                    </span>
+                    <span id="subdomain-help" style="font-size: 0.75rem;"></span>
                   </div>
                 </div>
-                <div class="row justify-content-end mt-3">
-                  <div class="col-6">
-                    <button class="btn btn-primary w-100 text-white shadow" style="background-color: #5969f3; border-color: #5969f3;" type="submit" id="nextBtn">
-                      Next 
-                      <i class="bi bi-chevron-right ms-2"></i>
-                    </button>
+
+                <div class="row g-2 mb-2">
+                  <div class="col-md-6">
+                    <label class="form-label-sm fw-semibold" for="{{ form.email.id_for_label }}">Work Email <span class='imp'>*</span></label>
+                    {% render_field form.email class+="form-control form-control-sm-custom validate" placeholder="john@acme.com" %}
+                    <span id="email-help" style="font-size: 0.75rem;"></span>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label-sm fw-semibold" for="{{ form.phone_number.id_for_label }}">Contact Number <span class='imp'>*</span></label>
+                    {% render_field form.phone_number class+="form-control form-control-sm-custom validate" %}
                   </div>
                 </div>
-  
+
+                <div class="row g-2 mb-2">
+                  <div class="col-md-6">
+                    <label class="form-label-sm fw-semibold" for="{{ form.country.id_for_label }}">Country <span class='imp'>*</span></label>
+                    {% render_field form.country class+="form-select form-control-sm-custom validate" %}
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label-sm fw-semibold" for="{{ form.number_of_devices.id_for_label }}">Est. Managed Devices <span class='imp'>*</span></label>
+                    {% render_field form.number_of_devices class+="form-control form-control-sm-custom validate" placeholder="e.g. 50" %}
+                  </div>
+                </div>
+
+                <div class="row g-2 mb-2">
+                  <div class="col-md-6">
+                    <label class="form-label-sm fw-semibold" for="{{ form.bracket.id_for_label }}">Business Type</label>
+                    {% render_field form.bracket class+="form-select form-control-sm-custom validate" %}
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label-sm fw-semibold" for="{{ form.contact_mode.id_for_label }}">Preferred Contact Mode</label>
+                    {% render_field form.contact_mode class+="form-select form-control-sm-custom validate" %}
+                  </div>
+                </div>
+
+                <div class="row g-2 mb-3">
+                  <div class="col-12">
+                    <label class="form-label-sm fw-semibold" for="{{ form.address.id_for_label }}">Office Address</label>
+                    {% render_field form.address class+="form-control form-control-sm-custom validate" rows="1" style="height: 36px; resize: none;" placeholder="Street, City, Zip" %}
+                  </div>
+                </div>
+
+                <div class="d-grid mt-2">
+                  <button class="btn btn-primary py-2 fw-semibold text-white shadow-sm" style="background-color: #4154f1; border-color: #4154f1;" type="submit" id="nextBtn" disabled>
+                    Complete Signup & Provision Workspace <i class="bi bi-chevron-right ms-1"></i>
+                  </button>
+                </div>
+
               </form>
-  
+
             </div>
-  
+
           </div>
         </div>
 
       </div>
-
-      </div>
-
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
+    </section>
+  </main>
 
   
   

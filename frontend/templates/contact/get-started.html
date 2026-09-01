@@ -28,7 +28,8 @@
 
             <div class="tab fw-bold">
   
-              <form id="regForm" action="{% url 'customers:add_customer' %}" method="post">
+              
+              <form id="regForm" onsubmit="return false;" novalidate>
                 {% csrf_token %}
                 <div class="row mb-2 g-3">
                   <div class="col-md">
@@ -143,21 +144,12 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
   <script>
-    // Add contry code to phone number field
-    var input = document.querySelector("#id_phone_number");
-    iti = window.intlTelInput(input, {
-      // options here
+
+    var phoneInput = document.getElementById("{{ form.phone_number.id_for_label }}");
+    var iti = window.intlTelInput(phoneInput, {
       utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
-
-    let form = document.getElementById('regForm')
-    form.addEventListener('submit', function(e) {
-      e.preventDefault(); // Temporarily prevent the form from submitting
-      var fullNumber = iti.getNumber();
-      // console.log(fullNumber); // or alert(fullNumber);
-      input.value = fullNumber;
-      form.submit(); 
-    });
+    
 
     // Adjust the width of the input field and the dropdown
     var adjustWidth = function() {
@@ -260,37 +252,6 @@
             }
         }
     }
-
-    // Async function to check email validation
-    // async function check_email_validation(event) {
-    //     // Regex for basic email format validation
-    //     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //     var email = document.getElementById('{{form.email.id_for_label}}'); // Adjust to use the actual ID
-    //     var currentValue = email.value.toLowerCase();
-
-    //     if (!regex.test(currentValue)) {
-    //         email_help.innerHTML = 'Invalid email format';
-    //         email_help.className = 'form-text fw-normal text-danger';
-    //         submit_button.setAttribute('disabled', true);
-    //     } else {
-    //         email_help.innerHTML = loadingMessage; // Display loader
-    //         try {
-    //             // Fetch request to validate email
-    //             const response = await fetch(`${scheme}//${domain}/api/customers/email-validator?email=${email.value}`); // Adjust the API endpoint
-    //             const data = await response.json();
-    //             if (!response.ok) throw new Error(data.message || `HTTP error! status: ${response.status}`);
-                
-    //             // Update UI based on email validation response
-    //             email_help.className = data.message == 'Email is available for registration.' ? 'form-text fw-normal text-success' : 'form-text fw-normal text-danger';
-    //             email_help.innerHTML = data.message;
-    //             // Check overall form validity
-    //             checkFormValidity();
-    //         } catch (error) {
-    //             email_help.innerHTML = 'Error checking email';
-    //             email_help.className = 'form-text fw-normal text-danger';
-    //         }
-    //     }
-    // }
 
     // Apply debounce to the validation functions
     // var debouncedCheckEmailValidation = debounce(check_email_validation, 500);

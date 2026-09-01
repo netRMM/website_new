@@ -2,41 +2,116 @@
 
 {% block content %}
 <main id="main">
-  <section id="hero" class="hero d-flex align-items-center py-5">
+  <section class="d-flex align-items-center justify-content-center py-5" style="min-height: 80vh; background: #f6f9ff;">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card text-center rounded-3 shadow-sm" style="border-top: 5px solid #012970;">
-            
-            <div class="card-header bg-white border-bottom-0 pt-4">
-              <div class="card-title fw-bold fs-2 text-dark">
-                <i class="bi bi-clock-history text-primary me-2"></i>
-                Request Received
-              </div>
-            </div>
+        <div class="col-11 col-sm-10 col-md-8 col-lg-6 col-xl-5">
 
-            <div class="card-body px-4 pb-4">
-              <p class="fs-6 text-muted mb-3">
-                Thank you for signing up with NetRMM!
+          <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white">
+            
+            <!-- Top Gradient Accent Bar -->
+            <div style="height: 6px; background: linear-gradient(90deg, #4154f1, #2eca6a, #4154f1);"></div>
+
+            <div class="card-body p-4 p-sm-5 text-center">
+
+              <!-- Icon with Pulsing Halo -->
+              <div class="position-relative d-inline-flex align-items-center justify-content-center mb-4">
+                <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                     style="width: 76px; height: 76px; background-color: #eef2ff; color: #4154f1;">
+                  <i class="bi bi-clock-history fs-1"></i>
+                </div>
+                <span class="position-absolute bottom-0 end-0 p-2 bg-success border border-white border-2 rounded-circle">
+                  <span class="visually-hidden">In progress</span>
+                </span>
+              </div>
+
+              <!-- Header Text -->
+              <h2 class="fw-bold text-dark mb-2 tracking-tight" style="color: #012970;">Request Received</h2>
+              <p class="text-muted small mb-4">
+                Thank you for choosing <span class="fw-semibold text-dark">NetRMM</span>! We are setting up your environment.
               </p>
 
-              <div class="alert alert-light border text-start mb-4 p-3 rounded">
-                {% if subdomain %}
-                <p class="mb-2 text-secondary small">
-                  <strong>Reserved Workspace:</strong> 
-                  <span class="text-primary fw-semibold">{{ subdomain }}.netrmm.com</span>
-                </p>
-                {% endif %}
-                <p class="mb-0 text-secondary small">
-                  We are preparing and provisioning your workspace. Once setup is complete, you will receive an email with your <strong>account activation link</strong> to set your password and access NetRMM.
-                </p>
-              </div>              
-            </div>
+              <!-- Workspace Details Box -->
+              {% if subdomain %}
+              <div class="p-3 mb-4 rounded-3 border text-start" style="background-color: #f8fafc; border-color: #e2e8f0 !important;">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <span class="text-uppercase fw-bold text-muted" style="font-size: 0.72rem; letter-spacing: 0.5px;">Reserved Workspace</span>
+                  <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2 py-1" style="font-size: 0.7rem;">
+                    <i class="bi bi-shield-check me-1"></i>Provisioning
+                  </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between bg-white p-2 rounded-2 border mt-2">
+                  <div class="d-flex align-items-center text-truncate me-2">
+                    <i class="bi bi-globe2 text-primary me-2 fs-5"></i>
+                    <span class="fw-bold text-dark text-truncate" id="workspaceUrl" style="font-family: monospace; font-size: 0.95rem;">
+                      {{ subdomain }}.netrmm.com
+                    </span>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-light border-0 text-secondary" title="Copy URL" onclick="copyWorkspaceUrl()">
+                    <i class="bi bi-clipboard" id="copyIcon"></i>
+                  </button>
+                </div>
+              </div>
+              {% endif %}
 
+              <!-- What Happens Next - Step Progress Flow -->
+              <div class="text-start mb-4 p-3 rounded-3" style="background: #ffffff; border: 1px dashed #cbd5e1;">
+                <h6 class="fw-bold text-dark mb-3 small text-uppercase" style="letter-spacing: 0.5px;">Next Steps</h6>
+                
+                <div class="d-flex align-items-start mb-3">
+                  <div class="rounded-circle bg-primary-subtle text-primary d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 26px; height: 26px; font-size: 0.75rem; font-weight: 700;">
+                    1
+                  </div>
+                  <div class="small text-secondary">
+                    <strong class="text-dark">Workspace Provisioning:</strong> We are allocating your resources and configuring security policies.
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-start">
+                  <div class="rounded-circle bg-light text-muted border d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 26px; height: 26px; font-size: 0.75rem; font-weight: 700;">
+                    2
+                  </div>
+                  <div class="small text-secondary">
+                    <strong class="text-dark">Activation Email:</strong> Check your inbox for your <strong>activation link</strong> to set your password and access your dashboard.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Button -->
+              <div class="d-grid gap-2">
+                <a href="/" class="btn btn-primary py-2 fw-semibold shadow-sm rounded-3" 
+                   style="background-color: #4154f1; border-color: #4154f1; transition: all 0.2s ease;">
+                  <i class="bi bi-arrow-left me-1"></i> Return to Homepage
+                </a>
+              </div>
+
+              <div class="mt-4 pt-2 border-top text-center">
+                <p class="text-muted small mb-0">
+                  Didn't receive an email within 10 minutes? <a href="/contact/" class="text-decoration-none fw-semibold" style="color: #4154f1;">Contact Support</a>
+                </p>
+              </div>
+
+            </div>
           </div>
+
         </div>
       </div>
     </div>
   </section>
 </main>
+
+<script>
+  function copyWorkspaceUrl() {
+    const urlText = document.getElementById('workspaceUrl')?.innerText.trim();
+    const copyIcon = document.getElementById('copyIcon');
+    if (urlText) {
+      navigator.clipboard.writeText('https://' + urlText).then(() => {
+        copyIcon.className = 'bi bi-check2 text-success';
+        setTimeout(() => {
+          copyIcon.className = 'bi bi-clipboard';
+        }, 2000);
+      });
+    }
+  }
+</script>
 {% endblock %}

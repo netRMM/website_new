@@ -308,49 +308,68 @@
     }
 
 
-    const SIGNUP_ENDPOINT = 'https://demo.netrmm.com/api/accounts/signup/';
+const SIGNUP_ENDPOINT = 'https://demo.netrmm.com/api/accounts/signup/';
 
 async function submitSignup(event) {
-  event.preventDefault();
+      event.preventDefault(); // Stop normal form post so user NEVER gets redirected on failure
 
-  const payload = {
-    company_name: document.getElementById('id_company_name').value.trim(),
-    subdomain: document.getElementById('id_subdomain').value.trim().toLowerCase(),
-    firstname: document.getElementById('id_firstname').value.trim(),
-    lastname: document.getElementById('id_lastname').value.trim(),
-    email: document.getElementById('id_email').value.trim().toLowerCase(),
-    phone_number: iti ? iti.getNumber() : document.getElementById('id_phone_number').value.trim(),
-    country: document.getElementById('id_country').value,
-    address: document.getElementById('id_address').value.trim()
-  };
+      var rawDevices = document.getElementById('{{form.number_of_devices.id_for_label}}').value.trim();
+      var devicesNum = parseInt(rawDevices, 10);
 
-  try {
-    const response = await fetch(SIGNUP_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
+      const payload = {
+        company_name: document.getElementById('{{form.company_name.id_for_label}}').value.trim(),
+        bracket: document.getElementById('{{form.bracket.id_for_label}}').value,
+        subdomain: document.getElementById('{{form.subdomain.id_for_label}}').value.trim().toLowerCase(),
+        firstname: document.getElementById('{{form.firstname.id_for_label}}').value.trim(),
+        lastname: document.getElementById('{{form.lastname.id_for_label}}').value.trim(),
+        email: document.getElementById('{{form.email.id_for_label}}').value.trim().toLowerCase(),
+        phone_number: iti ? iti.getNumber() : phoneInputField.value.trim(),
+        country: document.getElementById('{{form.country.id_for_label}}').value,
+        contact_mode: document.getElementById('{{form.contact_mode.id_for_label}}').value,
+        number_of_devices: isNaN(devicesNum) ? rawDevices : devicesNum,
+        address: document.getElementById('{{form.address.id_for_label}}').value.trim()
+      };
 
-    const data = await response.json();
+      submit_button.setAttribute('disabled', true);
+      submit_button.innerHTML = 'Submitting...';
 
-    if (response.status === 201) {
-      // Successful registration -> Redirect to local confirmation page
-      window.location.href = `/welcome/?subdomain=${encodeURIComponent(payload.subdomain)}`;
-    } else {
-      // Backend validation / conflict error
-      const errorMsg = data.error || (data.details ? Object.values(data.details)[0][0] : 'Signup failed.');
-      alert(errorMsg);
+      try {
+        const response = await fetch(SIGNUP_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (response.status === 201) {
+          // ONLY redirect on success
+          window.location.href = `/welcome/?subdomain=${encodeURIComponent(payload.subdomain)}`;
+        } else {
+          // Stay on current page, extract error message and show alert
+          let errorMsg = data.error || 'Signup failed. Please review your entries.';
+          if (data.details && typeof data.details === 'object') {
+            const firstKey = Object.keys(data.details)[0];
+            const errList = data.details[firstKey];
+            const msg = Array.isArray(errList) ? (errList[0].string || errList[0]) : errList;
+            errorMsg = `${firstKey.replace('_', ' ').toUpperCase()}: ${msg}`;
+          }
+          alert(errorMsg);
+          submit_button.removeAttribute('disabled');
+          submit_button.innerHTML = 'Next <i class="bi bi-chevron-right ms-2"></i>';
+        }
+      } catch (err) {
+        alert('Unable to connect to the signup server. Please check your network connection.');
+        submit_button.removeAttribute('disabled');
+        submit_button.innerHTML = 'Next <i class="bi bi-chevron-right ms-2"></i>';
+      }
     }
-  } catch (err) {
-    alert('Unable to connect to the signup server. Please try again.');
-  }
-}
 
-// Attach listener to form
-document.getElementById('regForm').addEventListener('submit', submitSignup);
+    // Attach listener
+    document.getElementById('regForm').addEventListener('submit', submitSignup);
 
   </script>
 {% endblock %}

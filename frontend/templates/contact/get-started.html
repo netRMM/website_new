@@ -22,6 +22,10 @@
         <div class="row">
           <div class="col-lg-6 mx-auto">
             {% include 'common/messages.html' %}
+
+            <!-- ADD IT HERE: Global error banner for API/network issues -->
+        <div id="form-error-alert" class="alert alert-danger" style="display: none; margin-bottom: 20px;"></div>
+
             <div class="tab fw-bold">
   
               <form id="regForm" action="{% url 'customers:add_customer' %}" method="post">
@@ -182,6 +186,8 @@
     var subdomain_help = document.getElementById('subdomain-help');
     var email_help = document.getElementById('email-help');
     var submit_button = document.getElementById('nextBtn');
+    var error_alert = document.getElementById('form-error-alert');
+
 
     // Loader message or image to display while fetching data
     const loadingMessage = `<div class="d-flex align-items-center text-dark p-2">
@@ -298,11 +304,31 @@
             submit_button.setAttribute('disabled', true);
         }
     }
+
+    // Clear inline email error when user starts editing email again
+    document.getElementById('{{ form.email.id_for_label }}').addEventListener('input', function() {
+      if (email_help) {
+        email_help.innerHTML = '';
+        email_help.className = 'form-text';
+      }
+    });
+
 // 4. Asynchronous Signup Submission
     const SIGNUP_ENDPOINT = 'https://demo.netrmm.com/api/accounts/signup/';
 
     async function submitSignup(event) {
       event.preventDefault(); // Stop native submit to prevent any unwanted page refresh/redirect
+
+
+      // Clear previous error states
+      if (email_help) {
+        email_help.innerHTML = '';
+        email_help.className = 'form-text';
+      }
+      if (error_alert) {
+        error_alert.style.display = 'none';
+        error_alert.innerText = '';
+      }
 
       var rawDevices = document.getElementById('{{ form.number_of_devices.id_for_label }}')?.value.trim() || '';
       var devicesNum = parseInt(rawDevices, 10);
@@ -341,20 +367,47 @@
           // ONLY redirect on success
           window.location.href = `/welcome/?subdomain=${encodeURIComponent(payload.subdomain)}`;
         } else {
-          // Stay on current page, extract and show the DRF error message
-          let errorMsg = data.error || 'Signup failed. Please review your entries.';
+          // Error: Stay on the same page and render error feedback
+          let generalMsg = data.error || 'Signup failed. Please check all inputs';
+
           if (data.details && typeof data.details === 'object') {
-            const firstKey = Object.keys(data.details)[0];
-            const errList = data.details[firstKey];
-            const msg = Array.isArray(errList) ? (errList[0].string || errList[0]) : errList;
-            errorMsg = `${firstKey.replace('_', ' ').toUpperCase()}: ${msg}`;
+            if (data.details.email) {
+              const errItem = data.details.email;
+              const msg = Array.isArray(errItem) ? (errItem[0].string || errItem[0]) : errItem;
+              if (email_help) {
+                email_help.className = 'form-text fw-normal text-danger';
+                email_help.innerHTML = `<i class="bi bi-exclamation-circle me-1"></i> ${msg}`;
+                document.getElementById('{{ form.email.id_for_label }}').focus();
+              }
+              generalMsg = null;
+            }
+
+            if (data.details.subdomain) {
+              const errItem = data.details.subdomain;
+              const msg = Array.isArray(errItem) ? (errItem[0].string || errItem[0]) : errItem;
+              if (subdomain_help) {
+                subdomain_help.className = 'form-text fw-normal text-danger';
+                subdomain_help.innerHTML = `<i class="bi bi-exclamation-circle me-1"></i> ${msg}`;
+              }
+              generalMsg = null;
+            }
           }
-          alert(errorMsg);
+
+          if (generalMsg && error_alert) {
+            error_alert.innerText = generalMsg;
+            error_alert.style.display = 'block';
+            error_alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+
           submit_button.removeAttribute('disabled');
           submit_button.innerHTML = 'Next <i class="bi bi-chevron-right ms-2"></i>';
         }
+
       } catch (err) {
-        alert('Unable to connect to the signup server. Please check your network connection.');
+        if (error_alert) {
+          error_alert.innerText = 'Unable to connect to the signup server. Please check your network connection.';
+          error_alert.style.display = 'block';
+        }
         submit_button.removeAttribute('disabled');
         submit_button.innerHTML = 'Next <i class="bi bi-chevron-right ms-2"></i>';
       }

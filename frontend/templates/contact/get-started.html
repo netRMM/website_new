@@ -11,7 +11,7 @@
 
   <main id="main">
 
-    <section id="contact" class="contact mt-3">
+    <section id="contact" class="contact py-3">
 
       <div class="container" data-aos="fade-up">
 
@@ -20,7 +20,7 @@
         </header>
 
         <div class="row">
-          <div class="col-lg-6 mx-auto">
+          <div class="col-lg-8 col-xl-7">
             {% include 'common/messages.html' %}
 
             <!-- ADD IT HERE: Global error banner for API/network issues -->
@@ -31,7 +31,7 @@
               
               <form id="regForm" onsubmit="return false;" novalidate>
                 {% csrf_token %}
-                <div class="row mb-2 g-3">
+                <div class="row g-2 mb-2">
                   <div class="col-md">
                     <label for="{{ form.firstname.id_for_label }}">First Name <span class='imp'>*</span></label>
                     {% render_field form.firstname class+="form-control validate" %}
@@ -42,7 +42,7 @@
                   </div>
                 </div>
   
-                <div class="row mb-2 g-3">
+                <div class="row g-2 mb-2">
                   <div class="col-md">
                     <label for="{{ form.company_name.id_for_label }}">Company Name <span class='imp'>*</span></label>
                     {% render_field form.company_name class+="form-control validate" %}
@@ -55,7 +55,7 @@
   
                 </div>
   
-                <div class="row mb-2 g-3">
+                <div class="row g-2 mb-2">
                   <div class="col-md">
                     <label for="{{ form.email.id_for_label }}">Email <span class='imp'>*</span></label>
                     {% render_field form.email class+="form-control validate" %}
@@ -70,7 +70,7 @@
                   </div>
                 </div>
   
-                <div class="row mb-2 g-3">
+                <div class="row g-2 mb-2">
                   <div class="col-md">
                     <label for="{{ form.address.id_for_label }}">Address</label>
                     {% render_field form.address rows="3" class+="form-control validate" style="height:100px; resize:none;" %}
@@ -78,7 +78,7 @@
   
                 </div>
   
-                <div class="row mb-2 g-3">
+                <div class="row g-2 mb-2">
                   <div class="col-md">
                     <label for="{{ form.country.id_for_label }}">Country <span class='imp'>*</span></label>
                     {% render_field form.country class+="form-select validate" %}
@@ -91,7 +91,7 @@
   
                 </div>
   
-                <div class="row mb-2 g-3">
+                <div class="row g-2 mb-2">
                   <div class="col-md-4">
                     <label for="{{ form.number_of_devices.id_for_label }}">No. of Devices <span
                         class='imp'>*</span></label>

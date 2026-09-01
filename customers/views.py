@@ -16,7 +16,17 @@ from .forms import CustomerForm,contactForm
 
 from .tokens import account_activation_token
 
-
+def signup_welcome(request):
+    """
+    Django view that renders the welcome template with context data.
+    """
+    subdomain = request.GET.get('subdomain', '').strip().lower()
+    
+    context = {
+        'subdomain': subdomain,
+    }
+    return render(request, 'emails/welcome.html', context)
+    
 # Create your views here.
 def add_customer(request):
     """

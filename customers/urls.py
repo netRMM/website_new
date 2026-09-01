@@ -10,5 +10,5 @@ urlpatterns = [
     path('activate/<uidb64>/<token>',activate,name="activate"),
     # path('<slug>/edit', views.edit_customer, name='edit_customer'),
     # ... your other routes ...
-    path('welcome/', views.signup_welcome, name='signup_welcome'),
+    path('welcome/', signup_welcome, name='signup_welcome'),
 ]
